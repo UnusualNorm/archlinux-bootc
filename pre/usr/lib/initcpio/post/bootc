@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-cp "$2" "/usr/lib/modules/${KERNELVERSION}/initramfs.img"

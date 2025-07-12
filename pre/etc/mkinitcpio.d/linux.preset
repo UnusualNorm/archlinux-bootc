@@ -1,0 +1,3 @@
+ALL_kver="/usr/lib/modules/$(uname -r)/vmlinuz"
+PRESETS=('default')
+default_image="/usr/lib/modules/$(uname -r)/initramfs.img"
