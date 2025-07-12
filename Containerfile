@@ -16,6 +16,9 @@ RUN mv /var/lib/pacman /usr/lib/pacman && \
     pacman -Sy --noconfirm linux linux-firmware grub ostree && \
     pacman -U --noconfirm /tmp/PKGBUILDS/*.pkg.tar.zst && \
     pacman -Scc --noconfirm && \
+    # TODO: Turn into a hook (either pacman or mkinitcpio)
+    sed -i "s|^ALL_kver=.*|ALL_kver=\"/usr/lib/modules/$(uname -r)/vmlinuz\"|" "/etc/mkinitcpio.d/linux.preset" && \
+    sed -i "s|^default_image=.*|default_image=\"/usr/lib/modules/$(uname -r)/initramfs.img\"|" "/etc/mkinitcpio.d/linux.preset" && \
     rm -r /tmp/PKGBUILDS && \
     rm -r /home /root /usr/local /srv && \
     rm -r /boot/* /var/cache/* /var/db/* /var/lib/* /var/log/*
