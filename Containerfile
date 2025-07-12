@@ -13,7 +13,7 @@ COPY --from=builder /PKGBUILDS /tmp/PKGBUILDS
 COPY pre /
 RUN mv /var/lib/pacman /usr/lib/pacman && \
     sed -i 's|^#\(DBPath\s*=\s*\).*|DBPath = /usr/lib/pacman|' /etc/pacman.conf && \
-    pacman -Sy --noconfirm linux linux-firmware ostree && \
+    pacman -Sy --noconfirm linux linux-firmware grub ostree && \
     pacman -U --noconfirm /tmp/PKGBUILDS/*.pkg.tar.zst && \
     pacman -Scc --noconfirm && \
     rm -r /tmp/PKGBUILDS && \
