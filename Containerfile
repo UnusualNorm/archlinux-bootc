@@ -18,7 +18,9 @@ RUN mv /var/lib/pacman /usr/lib/pacman && \
     pacman -Scc --noconfirm && \
     rm -r /tmp/PKGBUILDS && \
     rm -r /home /root /usr/local /srv && \
-    rm -r /var/cache/* /var/db/* /var/lib/* /var/log/*
+    rm -r /var/cache/* /var/db/* /var/lib/* /var/log/* && \
+    # TODO: File bug report to upstream archlinux image
+    chmod u+s /usr/bin/newuidmap /usr/bin/newgidmap
 COPY post /
 RUN bootc container lint
 LABEL containers.bootc=1
