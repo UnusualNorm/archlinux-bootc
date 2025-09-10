@@ -1,1 +1,1 @@
-podman build . -t archlinux-bootc
+sudo podman build --cap-add sys_admin -t archlinux-bootc .
