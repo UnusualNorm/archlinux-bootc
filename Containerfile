@@ -12,7 +12,7 @@ FROM ghcr.io/archlinux/archlinux:base-devel AS bootstrapper
 COPY --from=builder /PKGBUILDS /tmp/PKGBUILDS
 COPY files /mnt
 RUN pacman -Sy --noconfirm arch-install-scripts && \
-    pacstrap /mnt --overwrite '*' base grub linux linux-firmware ostree && \
+    pacstrap /mnt base grub linux linux-firmware ostree && \
     pacstrap -U /mnt /tmp/PKGBUILDS/*.pkg.tar.zst && \
     mv /mnt/var/lib/pacman /mnt/usr/lib/pacman && \
     rm -r /mnt/var/cache/* /mnt/var/db/* /mnt/var/lib/* /mnt/var/log/*
