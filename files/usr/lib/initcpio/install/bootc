@@ -1,0 +1,10 @@
+#!/bin/bash
+build() {
+    add_module erofs
+    add_module overlay
+    add_file /usr/lib/bootc/initramfs-setup
+    add_systemd_unit bootc-root-setup.service
+    add_dir /etc/systemd/system/initrd-root-fs.target.wants
+    add_symlink /etc/systemd/system/initrd-root-fs.target.wants/bootc-root-setup.service \
+                /usr/lib/systemd/system/bootc-root-setup.service
+}

@@ -15,7 +15,7 @@ RUN pacman -Sy --noconfirm arch-install-scripts && \
     pacstrap /mnt base grub linux linux-firmware ostree && \
     pacstrap -U /mnt /tmp/PKGBUILDS/*.pkg.tar.zst && \
     mv /mnt/var/lib/pacman /mnt/usr/lib/pacman && \
-    rm -r /mnt/var/cache/* /mnt/var/db/* /mnt/var/lib/* /mnt/var/log/*
+    rm -r /mnt/boot/* /mnt/var/cache/* /mnt/var/db/* /mnt/var/lib/* /mnt/var/log/*
 
 
 FROM scratch
