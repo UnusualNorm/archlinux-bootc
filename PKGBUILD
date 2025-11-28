@@ -18,10 +18,10 @@ prepare() {
 
 build() {
   cd "${pkgname}-${pkgver}"
-  cargo build --release
+  make bin
 }
 
 package() {
   cd "${pkgname}-${pkgver}"
-  make install-all DESTDIR="$pkgdir"
+  make install-all install-initramfs-dracut DESTDIR="$pkgdir"
 }

@@ -1,1 +1,1 @@
-sudo podman run -it --rm archlinux-bootc
+sudo podman run -it --rm archlinux-bootc bash
