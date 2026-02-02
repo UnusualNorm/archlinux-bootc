@@ -1,11 +1,12 @@
 FROM ghcr.io/archlinux/archlinux:base-devel AS builder
-RUN pacman -Sy && \
+RUN pacman -Sy --noconfirm git && \
+    git clone https://aur.archlinux.org/bootc.git /bootc && \
+    rm -r /bootc/.git && \
     useradd -m builder && \
     echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && \
     install -d -o builder /bootc
 USER builder
 WORKDIR /bootc
-COPY PKGBUILD .
 RUN makepkg -cs --noconfirm
 
 
@@ -13,7 +14,7 @@ FROM ghcr.io/archlinux/archlinux:base-devel AS bootstrapper
 COPY --from=builder /bootc/bootc-*.pkg.tar.zst /tmp
 COPY files /mnt
 RUN pacman -Sy --noconfirm arch-install-scripts && \
-    pacstrap /mnt base linux linux-firmware dosfstools e2fsprogs btrfs-progs && \
+    pacstrap /mnt base linux linux-firmware skopeo dosfstools e2fsprogs btrfs-progs && \
     pacstrap -U /mnt /tmp/bootc-*.pkg.tar.zst && \
     mv /mnt/var/lib/pacman /mnt/usr/lib/pacman
 
