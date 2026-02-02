@@ -23,11 +23,11 @@ FROM scratch
 LABEL containers.bootc=1
 COPY --from=bootstrapper /mnt /
 
-RUN pacman -S whois skopeo dosfstools e2fsprogs --noconfirm && \
-    systemctl enable systemd-networkd.service && \
-    systemctl enable systemd-resolved.service && \
-    echo -e "[Match]\nName=ens3\n[Network]\nDHCP=yes" > /etc/systemd/network/ens3.network && \
-    usermod -p "$(echo "changeme" | mkpasswd -s)" root
+# RUN pacman -S whois skopeo dosfstools e2fsprogs --noconfirm && \
+#     systemctl enable systemd-networkd.service && \
+#     systemctl enable systemd-resolved.service && \
+#     echo -e "[Match]\nName=ens3\n[Network]\nDHCP=yes" > /etc/systemd/network/ens3.network && \
+#     usermod -p "$(echo "changeme" | mkpasswd -s)" root
 
 RUN pacman -Scc --noconfirm && \
     # nonempty-boot
