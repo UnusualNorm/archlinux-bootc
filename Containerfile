@@ -14,7 +14,7 @@ FROM ghcr.io/archlinux/archlinux:base-devel AS bootstrapper
 COPY --from=builder /bootc/bootc-*.pkg.tar.zst /tmp
 COPY files /mnt
 RUN pacman -Sy --noconfirm arch-install-scripts && \
-    pacstrap /mnt base linux linux-firmware skopeo dosfstools e2fsprogs btrfs-progs && \
+    pacstrap /mnt base linux linux-firmware && \
     pacstrap -U /mnt /tmp/bootc-*.pkg.tar.zst && \
     mv /mnt/var/lib/pacman /mnt/usr/lib/pacman
 
@@ -23,7 +23,7 @@ FROM scratch
 LABEL containers.bootc=1
 COPY --from=bootstrapper /mnt /
 
-# RUN pacman -S whois --noconfirm && \
+# RUN pacman -S whois skopeo dosfstools e2fsprogs --noconfirm && \
 #     usermod -p "$(echo "changeme" | mkpasswd -s)" root
 
 RUN pacman -Scc --noconfirm && \
