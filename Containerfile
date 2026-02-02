@@ -33,4 +33,4 @@ RUN pacman -Scc --noconfirm && \
     rm -rf /var/log/* && \
     # var-tmpfiles
     rm -rf /var/cache/* /var/log/* /var/db/* /var/lib/* && \
-    bootc container lint
+    bootc container lint --fatal-warnings
