@@ -32,6 +32,8 @@ COPY --from=bootstrapper /mnt /
 RUN pacman -Scc --noconfirm && \
     # nonempty-boot
     rm -rf /boot/* && \
+    # nonempty-run-tmp
+    rm -rf /run/* /tmp/* && \
     # var-log
     rm -rf /var/log/* && \
     # var-tmpfiles
